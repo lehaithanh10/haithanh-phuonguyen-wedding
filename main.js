@@ -40,10 +40,17 @@ function startMusic() {
 }
 startMusic();
 
-window.addEventListener('scroll', function once() {
-  if (audio.paused) startMusic();
-  window.removeEventListener('scroll', once);
-}, { once: true, passive: true });
+function tryStartOnScroll() {
+  if (audio.paused) {
+    audio.play().then(() => {
+      onPlaying();
+      window.removeEventListener('scroll', tryStartOnScroll);
+    }).catch(() => {});
+  } else {
+    window.removeEventListener('scroll', tryStartOnScroll);
+  }
+}
+window.addEventListener('scroll', tryStartOnScroll, { passive: true });
 
 btn.onclick = () => {
   if (audio.paused) {
