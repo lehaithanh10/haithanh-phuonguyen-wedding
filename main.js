@@ -40,17 +40,12 @@ function startMusic() {
 }
 startMusic();
 
-function tryStartOnScroll() {
-  if (audio.paused) {
-    audio.play().then(() => {
-      onPlaying();
-      window.removeEventListener('scroll', tryStartOnScroll);
-    }).catch(() => {});
-  } else {
-    window.removeEventListener('scroll', tryStartOnScroll);
-  }
+function tryStart() {
+  if (audio.paused) audio.play().then(onPlaying).catch(() => {});
 }
-window.addEventListener('scroll', tryStartOnScroll, { passive: true });
+window.addEventListener('scroll', tryStart, { once: true, passive: true });
+document.addEventListener('click', tryStart, { once: true });
+document.addEventListener('touchstart', tryStart, { once: true });
 
 btn.onclick = () => {
   if (audio.paused) {
