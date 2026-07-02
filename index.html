@@ -360,16 +360,97 @@
             margin: 30px auto
         }
 
+        .giftCard {
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
         .giftBtn {
+            width: 100%;
             background: #fff;
             border: 1px solid #ecd7d1;
             border-radius: 18px;
             padding: 28px;
             text-align: center;
             color: var(--wine);
+            font-family: inherit;
             font-weight: 800;
             text-transform: uppercase;
+            cursor: pointer;
             box-shadow: 0 18px 40px #0001
+        }
+
+        .giftBtn::after {
+            content: '+';
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 400;
+            transition: transform .25s
+        }
+
+        .giftBtn[aria-expanded="true"]::after {
+            transform: rotate(45deg)
+        }
+
+        .giftDetails {
+            background: #fff;
+            border: 1px solid #ecd7d1;
+            border-radius: 18px;
+            padding: 22px 26px;
+            box-shadow: 0 18px 40px #0001
+        }
+
+        .giftRow {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0e2de;
+            text-align: left
+        }
+
+        .giftRow:last-child {
+            border-bottom: 0
+        }
+
+        .giftLabel {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: #8b0d12aa;
+            margin-bottom: 4px
+        }
+
+        .giftValueRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .giftValue {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--ink);
+            word-break: break-word
+        }
+
+        .copyBtn {
+            flex: 0 0 auto;
+            background: var(--wine);
+            color: #fff;
+            border: 0;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-family: inherit;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: .04em;
+            cursor: pointer
+        }
+
+        .copyBtn.copied {
+            background: var(--gold)
         }
 
         .thanks {
