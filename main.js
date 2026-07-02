@@ -96,7 +96,7 @@ document.querySelectorAll('.copyBtn').forEach(btn => {
   });
 });
 
-const RSVP_ENDPOINT = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzv5AUO8qsP9yY9Ow3cEVplJ9GjoNOg4JOIds3kayyykQLsfpPP1HMwVxfV0VUxC2Re/exec';
 const rsvpForm = document.querySelector('.rsvp .form');
 
 rsvpForm.addEventListener('submit', event => {
