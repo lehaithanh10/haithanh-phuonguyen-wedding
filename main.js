@@ -66,3 +66,26 @@ document.querySelectorAll('.grid img, .thanksGallery img').forEach(img =>
   })
 );
 lightbox.addEventListener('click', () => lightbox.classList.remove('show'));
+
+document.querySelectorAll('.giftBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = expanded;
+  });
+});
+
+document.querySelectorAll('.copyBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const value = btn.previousElementSibling.textContent.trim();
+    navigator.clipboard.writeText(value).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  });
+});
