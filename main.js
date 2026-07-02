@@ -95,3 +95,33 @@ document.querySelectorAll('.copyBtn').forEach(btn => {
       });
   });
 });
+
+const RSVP_ENDPOINT = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+const rsvpForm = document.querySelector('.rsvp .form');
+
+rsvpForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const submitBtn = rsvpForm.querySelector('button[type="submit"]');
+  const originalLabel = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  fetch(RSVP_ENDPOINT, {
+    method: 'POST',
+    body: new FormData(rsvpForm)
+  })
+    .then(response => {
+      if (!response.ok) throw new Error('Request failed');
+      submitBtn.textContent = 'Sent! Thank you';
+      rsvpForm.reset();
+    })
+    .catch(() => {
+      submitBtn.textContent = 'Failed — please try again';
+    })
+    .finally(() => {
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }, 3000);
+    });
+});
