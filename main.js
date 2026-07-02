@@ -77,15 +77,21 @@ document.querySelectorAll('.giftBtn').forEach(btn => {
 
 document.querySelectorAll('.copyBtn').forEach(btn => {
   btn.addEventListener('click', () => {
+    const original = btn.textContent;
     const value = btn.previousElementSibling.textContent.trim();
-    navigator.clipboard.writeText(value).then(() => {
-      const original = btn.textContent;
-      btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = original;
-        btn.classList.remove('copied');
-      }, 1500);
-    });
+    navigator.clipboard.writeText(value)
+      .then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+      })
+      .catch(() => {
+        btn.textContent = 'Copy failed';
+      })
+      .finally(() => {
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1500);
+      });
   });
 });
