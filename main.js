@@ -59,10 +59,39 @@ btn.onclick = () => {
 
 const lightbox = document.getElementById('lightbox');
 const big = lightbox.querySelector('img');
-document.querySelectorAll('.grid img').forEach(img =>
+document.querySelectorAll('.grid img, .thanksGallery img').forEach(img =>
   img.addEventListener('click', () => {
     big.src = img.src;
     lightbox.classList.add('show');
   })
 );
 lightbox.addEventListener('click', () => lightbox.classList.remove('show'));
+
+document.querySelectorAll('.giftBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = expanded;
+  });
+});
+
+document.querySelectorAll('.copyBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const original = btn.textContent;
+    const value = btn.previousElementSibling.textContent.trim();
+    navigator.clipboard.writeText(value)
+      .then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+      })
+      .catch(() => {
+        btn.textContent = 'Copy failed';
+      })
+      .finally(() => {
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+  });
+});
