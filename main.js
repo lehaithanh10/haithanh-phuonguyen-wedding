@@ -59,7 +59,7 @@ btn.onclick = () => {
 
 const lightbox = document.getElementById('lightbox');
 const big = lightbox.querySelector('img');
-document.querySelectorAll('.grid img').forEach(img =>
+document.querySelectorAll('.grid img, .thanksGallery img').forEach(img =>
   img.addEventListener('click', () => {
     big.src = img.src;
     lightbox.classList.add('show');
